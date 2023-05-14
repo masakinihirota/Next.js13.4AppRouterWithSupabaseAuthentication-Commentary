@@ -16,6 +16,7 @@ export default function Home() {
     return <Auth view={view} />
   }
 
+  // 認証されていると、ユーザーの情報を表示する。
   if (user) {
     return (
       <div>
@@ -35,5 +36,6 @@ export default function Home() {
     )
   }
 
+  // 認証されていないと、認証ボタンを表示する。
   return <Auth view={view} />
 }
