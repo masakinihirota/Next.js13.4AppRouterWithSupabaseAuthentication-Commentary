@@ -1,28 +1,36 @@
-'use client';
+// クライアントモードを使用する
+"use client"
 
+// AuthProviderからuseAuthとVIEWSをインポートする
 import { useAuth, VIEWS } from "./AuthProvider"
+// ResetPassword, SignIn, SignUp, UpdatePasswordコンポーネントをインポートする
 import ResetPassword from "./ResetPassword"
 import SignIn from "./SignIn"
-import SignUp from './SignUp';
-import UpdatePassword from './UpdatePassword';
+import SignUp from "./SignUp"
+import UpdatePassword from "./UpdatePassword"
 
+// Authコンポーネントを定義する
 const Auth = ({ view: initialView }) => {
-  let { view } = useAuth();
+  // useAuthからviewを取得する
+  let { view } = useAuth()
 
+  // initialViewがあればviewに代入する
   if (initialView) {
-    view = initialView;
+    view = initialView
   }
 
+  // viewに応じて適切なコンポーネントを返す
   switch (view) {
     case VIEWS.UPDATE_PASSWORD:
-      return <UpdatePassword />;
+      return <UpdatePassword />
     case VIEWS.FORGOTTEN_PASSWORD:
-      return <ResetPassword />;
+      return <ResetPassword />
     case VIEWS.SIGN_UP:
-      return <SignUp />;
+      return <SignUp />
     default:
-      return <SignIn />;
+      return <SignIn />
   }
-};
+}
 
-export default Auth;
+// Authコンポーネントをエクスポートする
+export default Auth
