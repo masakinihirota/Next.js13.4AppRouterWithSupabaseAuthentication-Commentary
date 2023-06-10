@@ -1,6 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-// Tailwind CSS の forms プラグイン
-// このプラグインは、フォームコントロールの基本的なリセットを提供し、ユーティリティを使用してスタイルをオーバーライドしやすくします。
 const forms = require("@tailwindcss/forms")
 
 module.exports = {
@@ -12,7 +10,6 @@ module.exports = {
   darkMode: "media",
   theme: {
     extend: {
-      // デフォルトのNext.jsの設定なので、不要なら削除してください
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",

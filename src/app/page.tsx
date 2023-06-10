@@ -1,20 +1,42 @@
 "use client"
-
-import { useState, useRef, ChangeEvent, RefObject } from "react"
+import Link from "next/link"
+import Auth from "@/components/Auth"
+import { useAuth, VIEWS } from "@/components/Auth/AuthProvider"
 
 export default function Home() {
-  const [name, setName] = useState<string>("")
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value)
+  const { initial, user, view, signOut } = useAuth()
+
+  if (initial) {
+    return <div>Loading...</div>
   }
-  const inputEl = useRef<HTMLInputElement>(null)
-  const handleOnClick = () => inputEl.current?.focus()
+
+  if (view === VIEWS.UPDATE_PASSWORD) {
+    return <Auth view={view} />
+  }
 
   return (
-    <div style={{ margin: "2em" }}>
-      <input ref={inputEl} type="text" value={name} onChange={handleOnChange} />
-      <p>名前：{name}</p>
-      <button onClick={handleOnClick}>フォーカスを当てる</button>
+    <div>
+      {user ? (
+        <>
+          <Link href="/authButton">
+            <button>認証ボタン</button>
+          </Link>
+          <h3>
+            ユーザーの役割: <strong>{user.role}</strong>
+          </h3>
+          <Link href="/profile">自分のプロフィールを見る</Link>
+          <br />
+          <Link href="/">
+            <button type="button" onClick={signOut}>
+              ログアウトする
+            </button>
+          </Link>
+        </>
+      ) : (
+        <Link href="/authButton">
+          <button>認証ボタン</button>
+        </Link>
+      )}
     </div>
   )
 }
